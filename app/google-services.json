@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "443416288875",
+    "firebase_url": "https://salaoapp-480ab.firebaseio.com",
+    "project_id": "salaoapp-480ab",
+    "storage_bucket": "salaoapp-480ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443416288875:android:2c9406388c3bbad708db2e",
+        "android_client_info": {
+          "package_name": "com.example.salaoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443416288875-b9not4abkgjbgdacm7spohos348k85im.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.salaoapp",
+            "certificate_hash": "dc358f70d98307a7dee8b80ca91f46934fc74dae"
+          }
+        },
+        {
+          "client_id": "443416288875-hh56ft9q5qgl7rvlpmo4ifm1g573e25n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyysUFxNhqDFUqeeQBxXNJpnet5-ioVlA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443416288875-hh56ft9q5qgl7rvlpmo4ifm1g573e25n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
