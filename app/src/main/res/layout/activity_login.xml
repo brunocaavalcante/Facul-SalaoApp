@@ -32,7 +32,7 @@
         app:layout_constraintVertical_bias="0.75" />
 
     <EditText
-        android:id="@+id/editTextSenhaa"
+        android:id="@+id/editTextSenhaLogin"
         android:layout_width="331dp"
         android:layout_height="46dp"
         android:background="@android:color/darker_gray"
@@ -60,7 +60,7 @@
         android:textAlignment="center"
         android:textColorHint="?attr/colorBackgroundFloating"
         android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@+id/editTextSenhaa"
+        app:layout_constraintBottom_toTopOf="@+id/editTextSenhaLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.558"
         app:layout_constraintStart_toStartOf="parent"
