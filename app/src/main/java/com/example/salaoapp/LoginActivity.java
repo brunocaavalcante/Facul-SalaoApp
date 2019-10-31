@@ -1,5 +1,6 @@
 package com.example.salaoapp;
 
+import Services.AlertService;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.content.Intent;
@@ -16,6 +17,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_cadastro;
     EditText login;
     EditText senha;
+    AlertService alertService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_cadastro = (Button) findViewById(R.id.btnCadastro);
         login = findViewById(R.id.editTextLogin);
         senha = findViewById(R.id.editTextSenhaLogin);
+        alertService = new AlertService();
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,11 +37,18 @@ public class LoginActivity extends AppCompatActivity {
                 Usuario usuario = new Usuario();
                 usuario.setLogin(login.getText().toString());
                 usuario.setSenha(senha.getText().toString());
+                usuario.setLogin("brunocds");
+                usuario.setSenha("123456");
 
-                UserService usuarioWS = new UserService();
-                usuarioWS.singInUser(usuario);
-                Intent it = new Intent(LoginActivity.this,MainActivity.class);
-                startActivity(it);
+                if(!usuario.getLogin().isEmpty()  || !usuario.getSenha().isEmpty())
+                {
+                    UserService usuarioWS = new UserService();
+                    usuarioWS.singInUser(usuario);
+                    Intent it = new Intent(LoginActivity.this,MainActivity.class);
+                    startActivity(it);
+                }else {
+                    alertService.exibirAlerta("Login ou Senha não preenchidos!","Os campos login e senha não podem ficar em branco.",LoginActivity.this);
+                }
             }
         });
 
