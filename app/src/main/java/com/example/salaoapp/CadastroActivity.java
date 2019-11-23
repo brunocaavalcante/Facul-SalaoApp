@@ -26,7 +26,7 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText login;
     private EditText senha;
     private EditText repita_senha;
-    private AlertService alert;
+    private AlertService alertService;
     private UserService userService;
 
     @Override
@@ -40,6 +40,7 @@ public class CadastroActivity extends AppCompatActivity {
         login = findViewById(R.id.editTextLoginCadastro);
         senha = findViewById(R.id.editTextSenhaCadastro);
         repita_senha = findViewById(R.id.editTextSenha2Cadastro);
+        alertService = new AlertService();
 
 
 
@@ -50,10 +51,10 @@ public class CadastroActivity extends AppCompatActivity {
                 user.setNome(nome.getText().toString());
                 user.setLogin(login.getText().toString());
                 user.setTelefone(telefone.getText().toString());
+                user.setSenha(senha.getText().toString());
 
-                //Valida se usuario digitou a mesma senha duas vezes
-                if (senha.getText().toString().equals(repita_senha.getText().toString())) {
-                    user.setSenha(senha.getText().toString());
+                String erros = validaDados(user);
+                if(erros.isEmpty()){
 
                     UserService userService = new UserService();
                     boolean cadastrou = userService.createUser(user);
@@ -81,8 +82,7 @@ public class CadastroActivity extends AppCompatActivity {
                     }
 
                 } else {
-                   alert.exibirAlerta("Senhas diferentes", "Senha digitadas diferentes por favor digite novamente", CadastroActivity.this);
-
+                    alertService.exibirAlerta("Ocorreram os seguintes erros:",""+erros, CadastroActivity.this);
                 }
             }
         });
@@ -94,5 +94,24 @@ public class CadastroActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
+    }
+
+    private String validaDados(Usuario user){
+
+        String erros = "";
+
+        if(user.getLogin().length()<3){
+            erros += "O login deve conter mais de 3 caracteres\n";
+        }
+        if(user.getSenha().length() < 6){
+            erros += "A senha deve conter mais de 6 caracteres\n";
+        }
+        if (!senha.getText().toString().equals(repita_senha.getText().toString())) {
+            erros += "Senhas diferentes!\n";
+        }
+        if(user.getSenha().isEmpty()|| user.getLogin().isEmpty()|| user.getNome().isEmpty() || user.getTelefone().isEmpty()){
+            erros += "Todos os campos devem ser preenchidos!\n";
+        }
+        return erros;
     }
 }

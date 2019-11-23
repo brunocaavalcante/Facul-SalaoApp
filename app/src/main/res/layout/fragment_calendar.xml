@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimary"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray">
 
 
     <TextView
@@ -32,9 +32,13 @@
 
     <Button
         android:id="@+id/btnCalendar"
-        android:layout_width="373dp"
-        android:layout_height="51dp"
+        android:layout_width="345dp"
+        android:layout_height="47dp"
+        android:background="@drawable/buttonround"
         android:text="Agendar Horario"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

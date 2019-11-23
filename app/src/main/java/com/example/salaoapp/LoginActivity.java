@@ -37,8 +37,8 @@ public class LoginActivity extends AppCompatActivity {
                 Usuario usuario = new Usuario();
                 usuario.setLogin(login.getText().toString());
                 usuario.setSenha(senha.getText().toString());
-                usuario.setLogin("brunocds");
-                usuario.setSenha("123456");
+                //usuario.setLogin("brunocds");
+                //usuario.setSenha("123456");
 
                 if(!usuario.getLogin().isEmpty()  || !usuario.getSenha().isEmpty())
                 {

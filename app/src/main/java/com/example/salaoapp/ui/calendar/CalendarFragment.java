@@ -19,19 +19,21 @@ public class CalendarFragment extends Fragment {
     private CalendarView calendar;
     private TextView myDate;
 
-    public View onCreateView(View view,@NonNull LayoutInflater inflater,
+    public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         calendarViewModel =
                 ViewModelProviders.of(this).get(CalendarViewModel.class);
         View root = inflater.inflate(R.layout.fragment_calendar, container, false);
 
-         calendar = (CalendarView) getView().findViewById(R.id.calendarView);
-         myDate = (TextView) getView().findViewById(R.id.myDate);
+         calendar = (CalendarView) root.findViewById(R.id.calendarView);
+         myDate = (TextView) root.findViewById(R.id.myDate);
 
          calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
              @Override
              public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
-                myDate.setText(i2+"/"+i1+"/"+i);
+                 String mes = ((i1+1)<=9?"0"+(i1+1):""+(i1+1));
+                 String dia = (i2<=9?"0"+i2:""+i2);
+                 myDate.setText(dia+"/"+mes+"/"+i);
              }
          });
         return root;

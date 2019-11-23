@@ -19,13 +19,11 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class UserService {
 
     private FirebaseAuth auth;
-    private FirebaseFirestore db;
-
 
     public boolean createUser(Usuario usuario){
 
         this.auth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         this.auth.createUserWithEmailAndPassword(usuario.getLogin(),usuario.getSenha());
 
