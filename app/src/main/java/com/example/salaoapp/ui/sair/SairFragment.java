@@ -1,4 +1,4 @@
-package com.example.salaoapp.ui.send;
+package com.example.salaoapp.ui.sair;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,17 +18,17 @@ import com.example.salaoapp.R;
 
 import Services.UserService;
 
-public class SendFragment extends Fragment {
+public class SairFragment extends Fragment {
 
-    private SendViewModel sendViewModel;
+    private SairViewModel sairViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        sendViewModel =
-                ViewModelProviders.of(this).get(SendViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_send, container, false);
+        sairViewModel =
+                ViewModelProviders.of(this).get(SairViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_sair, container, false);
         final TextView textView = root.findViewById(R.id.text_send);
-        sendViewModel.getText().observe(this, new Observer<String>() {
+        sairViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

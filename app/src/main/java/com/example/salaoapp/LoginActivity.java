@@ -1,5 +1,6 @@
 package com.example.salaoapp;
 
+import Services.AgendaService;
 import Services.AlertService;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
@@ -30,6 +31,13 @@ public class LoginActivity extends AppCompatActivity {
         senha = findViewById(R.id.editTextSenhaLogin);
         alertService = new AlertService();
 
+        UserService userService = new UserService();
+        if(userService.verifyAuthentication()){//Verifica se o usuario já está autenticado
+            Intent it = new Intent(LoginActivity.this,MainActivity.class);
+            it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK); //Faz com que a activity que foi chamada seja a principal desta forma o user não podera retornar para tela de login
+            startActivity(it);
+        }
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,15 +45,18 @@ public class LoginActivity extends AppCompatActivity {
                 Usuario usuario = new Usuario();
                 usuario.setLogin(login.getText().toString());
                 usuario.setSenha(senha.getText().toString());
-                //usuario.setLogin("brunocds");
-                //usuario.setSenha("123456");
 
                 if(!usuario.getLogin().isEmpty()  || !usuario.getSenha().isEmpty())
                 {
                     UserService usuarioWS = new UserService();
-                    usuarioWS.singInUser(usuario);
-                    Intent it = new Intent(LoginActivity.this,MainActivity.class);
-                    startActivity(it);
+                    if(usuarioWS.singInUser(usuario)){
+                        Intent it = new Intent(LoginActivity.this,MainActivity.class);
+                        it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK); //Faz com que a activity que foi chamada seja a principal desta forma o user não podera retornar para tela de login
+                        startActivity(it);
+                    }else{
+                        alertService.exibirAlerta("Login Inválido!","Usuario ou senha estão incorretos!",LoginActivity.this);
+                    }
+
                 }else {
                     alertService.exibirAlerta("Login ou Senha não preenchidos!","Os campos login e senha não podem ficar em branco.",LoginActivity.this);
                 }

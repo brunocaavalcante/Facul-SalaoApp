@@ -7,6 +7,7 @@ public class Usuario {
     private String login;
     private String telefone;
     private String senha;
+    private String foto;
 
     public void setNome(String nome){
         this.nome = nome;
@@ -44,4 +45,11 @@ public class Usuario {
         this.login = login;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 }

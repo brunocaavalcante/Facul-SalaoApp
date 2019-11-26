@@ -35,7 +35,7 @@ public class Agenda {
         this.data = data;
     }
 
-    public List<Agenda> getHorarios(Date data){
+   /* public List<Agenda> getHorarios(Date data){
         return AgendaService.listaHorarios(data);
-    }
+    }*/
 }

@@ -36,12 +36,24 @@ public class UserService {
         }
     }
 
-    public boolean singInUser(Usuario usuario){
+    public void logOut(){
+        auth = FirebaseAuth.getInstance();
+        auth.signOut();
+    }
 
-        this.auth = FirebaseAuth.getInstance();
-        this.auth.signInWithEmailAndPassword(usuario.getLogin(),usuario.getSenha());
-        if(this.auth.getCurrentUser() != null){
+    public boolean singInUser(Usuario usuario){
+        auth = FirebaseAuth.getInstance();
+        auth.signInWithEmailAndPassword(usuario.getLogin(),usuario.getSenha());
+        if(auth.getCurrentUser() != null){
             return  true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean verifyAuthentication(){
+        if(FirebaseAuth.getInstance().getUid() != null ){
+            return true;
         }else{
             return false;
         }

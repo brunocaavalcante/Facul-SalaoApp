@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+
 import Model.Usuario;
 import Services.AlertService;
 import Services.UserService;
@@ -40,6 +43,7 @@ public class CadastroActivity extends AppCompatActivity {
         login = findViewById(R.id.editTextLoginCadastro);
         senha = findViewById(R.id.editTextSenhaCadastro);
         repita_senha = findViewById(R.id.editTextSenha2Cadastro);
+        this.createMask();
         alertService = new AlertService();
 
 
@@ -71,6 +75,7 @@ public class CadastroActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent it = new Intent(CadastroActivity.this, MainActivity.class);
+                                it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK); //Faz com que a activity que foi chamada seja a principal desta forma o user não podera retornar para tela de cadastro
                                 startActivity(it);
                             }
                         });
@@ -113,5 +118,12 @@ public class CadastroActivity extends AppCompatActivity {
             erros += "Todos os campos devem ser preenchidos!\n";
         }
         return erros;
+    }
+
+    /*Criando Mascaras para os campos de cadastro*/
+    private void createMask(){
+        SimpleMaskFormatter simpleMaskFormatterTelefone = new SimpleMaskFormatter("(NN) NNNNN - NNNN");
+        MaskTextWatcher maskTextWatcherTelefone = new MaskTextWatcher(telefone,simpleMaskFormatterTelefone);
+        telefone.addTextChangedListener(maskTextWatcherTelefone);
     }
 }
