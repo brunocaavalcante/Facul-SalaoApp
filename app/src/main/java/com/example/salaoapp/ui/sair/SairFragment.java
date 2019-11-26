@@ -1,5 +1,6 @@
 package com.example.salaoapp.ui.send;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.salaoapp.LoginActivity;
 import com.example.salaoapp.R;
+
+import Services.UserService;
 
 public class SendFragment extends Fragment {
 
@@ -30,6 +34,11 @@ public class SendFragment extends Fragment {
                 textView.setText(s);
             }
         });
+        UserService userService = new UserService();
+        userService.logOut();
+        Intent it = new Intent(root.getContext(), LoginActivity.class);
+        it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK); //Faz com que a activity que foi chamada seja a principal desta forma o user não podera retornar para tela de login
+        startActivity(it);
         return root;
     }
 }
