@@ -2,17 +2,16 @@ package Services;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 import Model.Agenda;
 
@@ -20,21 +19,26 @@ public class AgendaService {
 
     private static FirebaseFirestore afs = FirebaseFirestore.getInstance();
 
-    public  void listaHorarios(){
+    public  List<Agenda> listaHorarios(Agenda agenda){
+        List<Agenda> list = new ArrayList<>();
         FirebaseFirestore afs = FirebaseFirestore.getInstance();
-        /*afs.collection("Agenda")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        afs.collection("/Agenda").document(agenda.getData()).collection("agendado")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("", document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.w("", "Error getting documents.", task.getException());
+                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                        if(e != null){
+                            Log.e("Teste",e.getMessage(),e);
+                            return;
+                        }
+                       List<Agenda> list = new ArrayList<>();
+                       List<DocumentSnapshot> docs = queryDocumentSnapshots.getDocuments();
+                        for (DocumentSnapshot doc:docs) {
+                            Agenda item = doc.toObject(Agenda.class);
+                            Log.d("tes",""+item.getData());
+                            list.add(item);
                         }
                     }
-                });*/
+                });
+        return list;
     }
 }

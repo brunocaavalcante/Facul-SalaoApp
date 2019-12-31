@@ -4,21 +4,22 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import java.util.HashMap;
-import java.util.Map;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import java.util.ArrayList;
+import java.util.List;
+
 import Model.Usuario;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class UserService {
 
     private FirebaseAuth auth;
+    private List<Usuario> list = new ArrayList<Usuario>();
 
     public boolean createUser(Usuario usuario){
 
@@ -56,6 +57,31 @@ public class UserService {
             return true;
         }else{
             return false;
+        }
+    }
+
+    public void getUsers(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        try {
+            db.collection("Usuarios")
+                    .whereEqualTo("funcionario", false)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    String id = document.getId();
+                                    Log.d("teste", document.getId() + " => " + document.getData());
+                                }
+                            } else {
+                                Log.d("teste", "Error getting documents: ", task.getException());
+                            }
+                        }
+                    });
+        }catch (Exception e){
+            Log.d("teste",  e.getMessage());
         }
     }
 

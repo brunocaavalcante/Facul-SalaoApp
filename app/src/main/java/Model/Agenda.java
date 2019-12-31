@@ -1,15 +1,20 @@
 package Model;
 
-import java.util.Date;
-import java.util.List;
-
-import Services.AgendaService;
-
 public class Agenda {
 
     private int hora;
-    private boolean disponivel;
-    private Date data;
+    private String data;
+    private String id_user;
+
+    public String getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(String id_user) {
+        this.id_user = id_user;
+    }
+
+    private String id_cabeleleiro;
 
     public void setHora(int hora) {
         this.hora = hora;
@@ -19,23 +24,11 @@ public class Agenda {
         return this.hora;
     }
 
-    public boolean getDisponivel() {
-        return disponivel;
-    }
-
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
-    }
-
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
-
-   /* public List<Agenda> getHorarios(Date data){
-        return AgendaService.listaHorarios(data);
-    }*/
 }

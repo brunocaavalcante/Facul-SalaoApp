@@ -7,7 +7,25 @@ public class Usuario {
     private String login;
     private String telefone;
     private String senha;
+    private boolean adm;
+    private boolean funcionario;
     private String foto;
+
+    public boolean isAdm() {
+        return adm;
+    }
+
+    public void setAdm(boolean adm) {
+        this.adm = adm;
+    }
+
+    public boolean isFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(boolean funcionario) {
+        this.funcionario = funcionario;
+    }
 
     public void setNome(String nome){
         this.nome = nome;
