@@ -2,7 +2,6 @@ package com.example.salaoapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +22,6 @@ import Model.Agenda;
 
 public class HorariosActivity extends AppCompatActivity {
 
-    public FirebaseFirestore base;
     private ListView lvHorarios;
 
     @Override
